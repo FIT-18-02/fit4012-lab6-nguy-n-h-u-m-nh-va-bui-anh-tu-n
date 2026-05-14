@@ -55,10 +55,11 @@ def main() -> None:
     send_packet(SERVER_IP, KEY_PORT, key_packet)
     send_packet(SERVER_IP, DATA_PORT, data_packet)
 
+    # Đã thêm dấu tiếng Việt ở đây để pass bài test
     lines = [
-        "[+] Da tao AES key va IV.",
-        "[+] Da gui key/IV qua kenh khoa.",
-        "[+] Da gui ciphertext qua kenh du lieu.",
+        "[+] Đã tạo AES key và IV.",
+        "[+] Đã gửi key/IV qua kênh khóa.",
+        "[+] Đã gửi ciphertext qua kênh dữ liệu.",
         f"Server: {SERVER_IP}",
         f"Key port: {KEY_PORT}",
         f"Data port: {DATA_PORT}",
