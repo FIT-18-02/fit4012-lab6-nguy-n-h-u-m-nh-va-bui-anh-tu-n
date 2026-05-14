@@ -3,7 +3,7 @@
 ## Thông tin nhóm
 
 - Thành viên 1: Nguyễn Hữu Mạnh
-- Thành viên 2: TODO_STUDENT
+- Thành viên 2: Tuấn
 
 ## Mục tiêu
 
@@ -11,7 +11,7 @@ Mục tiêu của bài lab này là xây dựng một hệ thống truyền tin 
 
 ## Phân công thực hiện
 
-Nguyễn Hữu Mạnh: Phụ trách thiết kế cấu trúc gói tin, triển khai logic cho sender.py và viết các hàm bổ trợ mã hóa/giải mã AES-CBC trong aes_socket_utils.py.  
+Nguyễn Hữu Mạnh: Phụ trách thiết kế cấu trúc gói tin, triển khai logic cho sender.py và viết các hàm bổ trợ mã hóa/giải mã AES-CBC trong aes_socket_utils.py. 
 
 Thành viên 2: Phụ trách triển khai receiver.py để xử lý kết nối đồng thời từ các kênh , thiết lập hệ thống ghi log và xây dựng tài liệu threat-model-1page.md.  Làm chung: Cùng thực hiện kiểm thử hệ thống (integration test), phân tích kết quả giải mã và hoàn thiện báo cáo tổng kết.
 
