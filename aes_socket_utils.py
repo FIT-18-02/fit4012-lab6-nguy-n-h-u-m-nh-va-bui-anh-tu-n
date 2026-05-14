@@ -54,8 +54,10 @@ def encrypt_aes_cbc(
     key_size: int = 16,
 ) -> Tuple[bytes, bytes, bytes]:
     """Encrypt plaintext with AES-CBC and PKCS#7 padding."""
-    if key is None or iv is None:
-        key, iv = generate_key_iv(key_size)
+    if key is None:
+        key = os.urandom(key_size)
+    if iv is None:
+        iv = os.urandom(IV_SIZE)
 
     validate_key_iv(key, iv)
 
