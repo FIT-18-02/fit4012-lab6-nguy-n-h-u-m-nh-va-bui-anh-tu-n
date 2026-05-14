@@ -62,6 +62,7 @@ def receive_data_packet() -> bytes:
 def main() -> None:
     lines = []
 
+    # Giữ nguyên không dấu chữ 'kenh khoa' để test regex tìm thấy
     line = f"[*] Receiver dang lang nghe kenh khoa tai {HOST}:{KEY_PORT}"
     print(line)
     lines.append(line)
@@ -69,10 +70,12 @@ def main() -> None:
     key_packet = receive_key_packet()
     key, iv = parse_key_packet(key_packet)
 
-    line = "[+] Da nhan AES key va IV."
+    # Cập nhật có dấu
+    line = "[+] Đã nhận AES key và IV."
     print(line)
     lines.append(line)
 
+    # Giữ nguyên không dấu
     line = f"[*] Receiver dang lang nghe kenh du lieu tai {HOST}:{DATA_PORT}"
     print(line)
     lines.append(line)
@@ -84,20 +87,22 @@ def main() -> None:
     if len(ciphertext) != length:
         raise ValueError("Ciphertext nhan duoc khong khop length header.")
 
-    line = "[+] Da nhan ciphertext."
+    # Cập nhật có dấu
+    line = "[+] Đã nhận ciphertext."
     print(line)
     lines.append(line)
 
     plaintext = decrypt_aes_cbc(key, iv, ciphertext)
     message = plaintext.decode("utf-8", errors="replace")
 
+    # Cập nhật có dấu
     lines.extend([
-        "[+] Da giai ma thanh cong.",
-        f"[+] Ban tin goc: {message}",
+        "[+] Đã giải mã thành công.",
+        f"[+] Bản tin gốc: {message}",
     ])
 
-    print("[+] Da giai ma thanh cong.")
-    print(f"[+] Ban tin goc: {message}")
+    print("[+] Đã giải mã thành công.")
+    print(f"[+] Bản tin gốc: {message}")
 
     if OUTPUT_FILE:
         Path(OUTPUT_FILE).write_bytes(plaintext)
