@@ -1,13 +1,12 @@
 import os
 import socket
 import sys
-import io
 import time
 from pathlib import Path
 
-# Fix lỗi Unicode trên Windows nhưng an toàn với pytest
-if hasattr(sys.stdout, 'buffer'):
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+# Fix lỗi Unicode an toàn, không làm crash luồng CI
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 from aes_socket_utils import build_data_packet, build_key_packet, encrypt_aes_cbc
 
@@ -38,12 +37,12 @@ def send_packet(host: str, port: int, packet: bytes, max_retries: int = 5) -> No
                 sock.settimeout(TIMEOUT)
                 sock.connect((host, port))
                 sock.sendall(packet)
-            return  # Neu gui thanh cong thi thoat khoi ham
+            return
         except ConnectionRefusedError:
             if attempt < max_retries - 1:
-                time.sleep(0.5)  # Cho 0.5s roi thu ket noi lai
+                time.sleep(0.5)
             else:
-                raise  # Neu thu het so lan ma van loi thi bao loi
+                raise
 
 
 def main() -> None:
