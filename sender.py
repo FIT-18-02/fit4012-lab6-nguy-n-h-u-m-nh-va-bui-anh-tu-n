@@ -30,12 +30,20 @@ def get_plaintext() -> bytes:
     return input("Nhap ban tin: ").encode("utf-8")
 
 
-def send_packet(host: str, port: int, packet: bytes) -> None:
-    """Open one TCP connection and send all bytes."""
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.settimeout(TIMEOUT)
-        sock.connect((host, port))
-        sock.sendall(packet)
+def send_packet(host: str, port: int, packet: bytes, max_retries: int = 5) -> None:
+    """Open one TCP connection and send all bytes (Co co che tu dong thu lai)."""
+    for attempt in range(max_retries):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.settimeout(TIMEOUT)
+                sock.connect((host, port))
+                sock.sendall(packet)
+            return  # Neu gui thanh cong thi thoat khoi ham
+        except ConnectionRefusedError:
+            if attempt < max_retries - 1:
+                time.sleep(0.5)  # Cho 0.5s roi thu ket noi lai
+            else:
+                raise  # Neu thu het so lan ma van loi thi bao loi
 
 
 def main() -> None:
@@ -46,7 +54,6 @@ def main() -> None:
     data_packet = build_data_packet(ciphertext)
 
     send_packet(SERVER_IP, KEY_PORT, key_packet)
-    time.sleep(0.5)
     send_packet(SERVER_IP, DATA_PORT, data_packet)
 
     lines = [
