@@ -4,9 +4,11 @@ import os
 import socket
 from pathlib import Path
 
-# Fix lỗi Unicode trên Windows
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+# Fix lỗi Unicode trên Windows nhưng an toàn với pytest
+if hasattr(sys.stdout, 'buffer'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+if hasattr(sys.stderr, 'buffer'):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 from aes_socket_utils import (
     LENGTH_HEADER_SIZE,
