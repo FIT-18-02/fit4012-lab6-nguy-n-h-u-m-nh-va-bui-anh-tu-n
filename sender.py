@@ -2,6 +2,7 @@ import os
 import socket
 import sys
 import io
+import time
 from pathlib import Path
 
 # Fix lỗi Unicode trên Windows nhưng an toàn với pytest
@@ -45,6 +46,7 @@ def main() -> None:
     data_packet = build_data_packet(ciphertext)
 
     send_packet(SERVER_IP, KEY_PORT, key_packet)
+    time.sleep(0.5)
     send_packet(SERVER_IP, DATA_PORT, data_packet)
 
     lines = [
