@@ -6,6 +6,7 @@
 
 ## Phản hồi đánh giá chéo
 
+
 ### 1. Về Sender và Receiver
 - **Nhận xét**: Code sender và receiver hoạt động đúng, có xử lý timeout và log.
 - **Phản hồi**: Cảm ơn nhận xét. Chúng tôi đã kiểm tra kỹ và đảm bảo luồng gửi/nhận qua 2 kênh (KEY_PORT và DATA_PORT) hoạt động chính xác.
