@@ -4,8 +4,9 @@ import sys
 import io
 from pathlib import Path
 
-# Fix lỗi Unicode trên Windows
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+# Fix lỗi Unicode trên Windows nhưng an toàn với pytest
+if hasattr(sys.stdout, 'buffer'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 from aes_socket_utils import build_data_packet, build_key_packet, encrypt_aes_cbc
 
