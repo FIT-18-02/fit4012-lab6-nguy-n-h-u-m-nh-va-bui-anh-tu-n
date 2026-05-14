@@ -1,8 +1,8 @@
 # Peer Review Response - Lab 6 AES-CBC Socket
 
 ## Thành viên nhóm
-- TẠ CÔNG SƠN
-- NGUYỄN VŨ PHƯƠNG
+- NGUYỄN HỮU MẠNH
+- BÙI ANH TUẤN
 
 ## Phản hồi đánh giá chéo
 
